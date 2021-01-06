@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "929143685642",
+    "project_id": "itax-test",
+    "storage_bucket": "itax-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:929143685642:android:dd9eca33fbbe1dda9a95f3",
+        "android_client_info": {
+          "package_name": "com.example.itax_test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "929143685642-m8gbq2i7infpahkljcb7ne5vk7ehalod.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCT5oLps2ctlbqc5MOHVSZthVM7iMzHcL8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "929143685642-m8gbq2i7infpahkljcb7ne5vk7ehalod.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
