@@ -21,5 +21,5 @@ AuthState _fetchFailed(AuthState state, FetchAuthFailure action) {
 }
 
 AuthState _authenSuccess(AuthState state, AuthenSuccessAction action) {
-  return state.copyWith(isLoading: false, user: action.user);
+  return state.copyWith(isLoading: false, user: action.user, isLogged: true);
 }

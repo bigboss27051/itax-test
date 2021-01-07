@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:itax_test/screens/screens.dart';
+import 'package:itax_test/theme.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_persist/redux_persist.dart';
 import 'package:redux_thunk/redux_thunk.dart';
@@ -76,7 +78,12 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return new StoreProvider<AppState>(
       store: store,
-      child: MaterialApp(title: 'Todos Mobile'),
+      child: MaterialApp(
+          title: 'Todos Mobile',
+          theme: getTheme(context),
+          routes: <String, WidgetBuilder>{
+            '/': (BuildContext context) => new LoginScreen(),
+          }),
     );
   }
 }

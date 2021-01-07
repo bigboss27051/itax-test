@@ -6,7 +6,7 @@ import 'package:redux_thunk/redux_thunk.dart';
 import '../../models/models.dart';
 import '../../repositories/repositories.dart';
 
-ThunkAction signUpLocalAction({
+ThunkAction signInLocalAction({
   Completer completer,
   String email,
   String password,
@@ -21,6 +21,23 @@ ThunkAction signUpLocalAction({
     } catch (e) {
       completer
           .completeError(e.response.data['error'] ?? e.response.statusMessage);
+      store.dispatch(new FetchAuthFailure());
+    }
+  };
+}
+
+ThunkAction signOutAction(
+  Completer completer,
+) {
+  return (Store store) async {
+    try {
+      store.dispatch(new StartAuthLoadingAction());
+      Future.delayed(Duration(seconds: 2), () async {
+        store.dispatch(new SignOutAction());
+        completer.complete(null);
+      });
+    } catch (e) {
+      completer.completeError(e.toString());
       store.dispatch(new FetchAuthFailure());
     }
   };
