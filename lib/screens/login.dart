@@ -19,7 +19,9 @@ class _LoginScreenState extends State<LoginScreen> {
   final emailController = new TextEditingController();
   final passwordController = new TextEditingController();
 
-  handleOnSubmit(BuildContext context, UserViewModel vm) {}
+  handleOnSubmit(BuildContext context, UserViewModel vm) {
+    
+  }
 
   @override
   Widget build(BuildContext context) {

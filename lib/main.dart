@@ -46,43 +46,15 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   _MyAppState(this.store);
 
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    switch (state) {
-      case AppLifecycleState.inactive:
-        print("Inactive");
-        break;
-      case AppLifecycleState.paused:
-        print("Paused");
-        break;
-      case AppLifecycleState.resumed:
-        print("Resumed");
-        break;
-      case AppLifecycleState.detached:
-        print("Detached");
-        break;
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     return new StoreProvider<AppState>(
       store: store,
       child: MaterialApp(
           title: 'Todos Mobile',
           theme: getTheme(context),
+          home: SplashScreen(),
           routes: <String, WidgetBuilder>{
-            '/': (BuildContext context) => new LoginScreen(),
+            '/login': (BuildContext context) => new LoginScreen(),
           }),
     );
   }
