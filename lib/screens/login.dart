@@ -29,8 +29,9 @@ class _LoginScreenState extends State<LoginScreen> {
         converter: (Store<AppState> store) => UserViewModel.create(store),
         builder: (context, vm) {
           return Scaffold(
-            backgroundColor: Color.fromRGBO(250, 250, 251, 1),
-            body: Container(
+            backgroundColor: Color.fromRGBO(251, 251, 251, 1),
+            body: SingleChildScrollView(child:
+            Container(
                 alignment: Alignment.center,
                 padding: EdgeInsets.only(
                     top: (height / 100) * 18.0,
@@ -38,7 +39,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     right: (width / 100) * 9.5),
                 child: Form(
                   key: _formKey,
-                  child: Column(
+                  child: 
+                  Column(
                     children: [
                       Text('Login',
                           style: Theme.of(context).textTheme.headline1),
@@ -49,6 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         decoration: InputDecoration(
                           hintText: 'Email',
                         ),
+                        keyboardType: TextInputType.emailAddress,
                         controller: emailController,
                         validator: (String value) {
                           if (value.isEmpty) {
@@ -75,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: ((height / 100) * 3),
                       ),
                       Button(
-                        label: ' Login',
+                        label: 'Login',
                         onPressed: () async {
                           if (_formKey.currentState.validate()) {
                             handleOnSubmit(context, vm);
@@ -84,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       )
                     ],
                   ),
-                )),
+                ))),
           );
         });
   }
