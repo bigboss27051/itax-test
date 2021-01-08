@@ -1,5 +1,8 @@
 # itax_test
 
+email: test@mail.com
+password: 123456
+
 A new Flutter project.
 
 ## Getting Started
