@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:itax_test/models/models.dart';
 import 'package:itax_test/redux/redux.dart';
 import 'package:itax_test/widget/widget.dart';
 import 'package:redux/redux.dart';
@@ -14,19 +15,35 @@ class TodoListScreen extends StatefulWidget {
 }
 
 class _TodoListScreenState extends State<TodoListScreen> {
+  onCancelModal() {
+    Navigator.of(context).pop();
+  }
 
-  onAddTodo(context) {
+  onAddNewTodo({BuildContext context, Todo todo, TodoViewModel vm}) {
+    print('todo ${todo.toJson()}');
+    vm.addTodo(todo);
+    Navigator.of(context).pop();
+  }
+
+  onShowModalAddTodo(BuildContext context, TodoViewModel vm) {
     showModalBottomSheet(
         context: context,
         isScrollControlled: true,
         shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
         builder: (BuildContext bc) {
           return AnimatedPadding(
-            padding: MediaQuery.of(context).viewInsets,
-            duration: const Duration(milliseconds: 100),
-            curve: Curves.decelerate,
-            child: AddTodo(onCancel: () {}, onSave: () {},));
+              padding: MediaQuery.of(context).viewInsets,
+              duration: const Duration(milliseconds: 100),
+              curve: Curves.decelerate,
+              child: AddTodo(
+                onCancel: onCancelModal,
+                onSave: (
+                  Todo todo,
+                ) {
+                  onAddNewTodo(vm: vm, context: context, todo: todo);
+                },
+              ));
         });
   }
 
@@ -70,7 +87,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                       ),
                       Button(
                         onPressed: () {
-                          onAddTodo(context);
+                          onShowModalAddTodo(context, vm);
                         },
                         icon: Icon(
                           Icons.add,

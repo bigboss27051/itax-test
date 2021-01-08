@@ -18,9 +18,12 @@ class _AddTodoState extends State<AddTodo> {
   final createDateController = new TextEditingController();
   DateTime selectedDate = DateTime.now();
   handleOnSave() {
-    if(_formKey.currentState.validate()) {
-    final todo = Todo(todo: todoController.text, isCompleted: false);
-    widget.onSave(todo);
+    if (_formKey.currentState.validate()) {
+      final todo = Todo(
+          todo: todoController.text,
+          isCompleted: false,
+          createdAt: createDateController.text);
+      widget.onSave(todo);
     }
   }
 
@@ -29,7 +32,7 @@ class _AddTodoState extends State<AddTodo> {
         context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime.now(),
-        lastDate:  DateTime(2100));
+        lastDate: DateTime(2100));
     print('picked ${picked.toString()}');
     if (picked != null)
       setState(() {
@@ -104,10 +107,10 @@ class _AddTodoState extends State<AddTodo> {
                             _selectDate(context);
                           },
                           validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please input task.';
-                    }
-                  },
+                            if (value.isEmpty) {
+                              return 'Please input task.';
+                            }
+                          },
                           decoration: InputDecoration(
                               hintText: 'วัน / เดือน / ปี พ.ศ.',
                               suffixIcon: Icon(Icons.calendar_today)),

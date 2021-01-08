@@ -16,11 +16,9 @@ class TodoState extends Equatable {
   }
 
   TodoState copyWith({
-     List<Todo> todos,
+    List<Todo> todos,
   }) {
-    return new TodoState(
-      todos: todos ?? this.todos
-    );
+    return new TodoState(todos: todos ?? this.todos);
   }
 
   @override
@@ -28,11 +26,13 @@ class TodoState extends Equatable {
         todos,
       ];
 
-  static TodoState fromJson(dynamic json) => TodoState(
-        todos: (json['todos'] as List).map((i) => Todo.fromJson(i)).toList(),
-      );
+  static TodoState fromJson(dynamic json) {
+    return TodoState(
+      todos: (jsonDecode(json['todos']) as List).map((i) => Todo.fromJson(i)).toList(),
+    );
+  }
 
-  dynamic toJson() => {
-        'todos': jsonEncode(todos),
-      };
+  dynamic toJson() {
+    return {'todos': jsonEncode(todos.map((e) => e.toJson()).toList())};
+  }
 }

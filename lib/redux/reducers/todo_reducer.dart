@@ -9,9 +9,8 @@ final todoReducer = combineReducers<TodoState>([
 
 TodoState _addTodo(TodoState state, AddTodoAction action) {
   state.todos.add(action.todo);
-  state.todos.reversed;
   return state.copyWith(
-    todos: state.todos.reversed,
+    todos: state.todos.reversed.toList(),
   );
 }
 
