@@ -8,8 +8,7 @@ class UserViewModel {
   final User user;
   final Function({Completer completer, String email, String password})
       signInLocal;
-  final Function(Completer completer) signOut;
-  UserViewModel({this.isLoading, this.user, this.signInLocal, this.signOut});
+  UserViewModel({this.isLoading, this.user, this.signInLocal});
 
   factory UserViewModel.create(Store<AppState> store) {
     _signInLocal({Completer completer, String email, String password}) {
@@ -17,14 +16,11 @@ class UserViewModel {
           completer: completer, email: email, password: password));
     }
 
-    _signOut(Completer completer) {
-      store.dispatch(signOutAction(completer));
-    }
+    
 
     return UserViewModel(
         isLoading: store.state.authState.isLoading,
         user: store.state.authState.user,
-        signInLocal: _signInLocal,
-        signOut: _signOut);
+        signInLocal: _signInLocal,);
   }
 }

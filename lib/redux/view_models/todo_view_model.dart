@@ -7,7 +7,8 @@ class TodoViewModel {
   final List<Todo> todos;
   final Function(Todo todo) addTodo;
   final Function(int indexTodo) changeStatusTodo;
-  TodoViewModel({this.todos, this.addTodo, this.changeStatusTodo});
+  final Function(Completer completer) signOut;
+  TodoViewModel({this.todos, this.addTodo, this.changeStatusTodo, this.signOut});
 
   factory TodoViewModel.create(Store<AppState> store) {
     _addTodo(Todo todo) {
@@ -18,9 +19,14 @@ class TodoViewModel {
       store.dispatch(ChangeStatusTodoAction(indexTodo));
     }
 
+    _signOut(Completer completer) {
+      store.dispatch(signOutAction(completer));
+    }
+
     return TodoViewModel(
         todos: store.state.todoState.todos,
         addTodo: _addTodo,
-        changeStatusTodo: _changeStatusTodo);
+        changeStatusTodo: _changeStatusTodo,
+        signOut: _signOut);
   }
 }
