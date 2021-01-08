@@ -1,17 +1,20 @@
-import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
+class User {
+  User({
+    this.email,
+    this.id,
+  });
 
-class User extends Equatable {
-  const User({
-    @required this.email,
-    @required this.id,
-  })  : assert(email != null),
-        assert(id != null);
+  String email;
+  String id;
 
-  final String email;
-  final String id;
-  static const empty = User(email: '', id: '');
-
-  @override
-  List<Object> get props => [email, id];
+  User.fromJson(Map<String, dynamic> json) {
+    email = json['email'];
+    id = json['id'];
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['email'] = email;
+    data['id'] = id;
+    return data;
+  }
 }

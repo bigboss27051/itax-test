@@ -12,7 +12,7 @@ class AuthState extends Equatable {
   factory AuthState.initial() {
     return new AuthState(
       isLoading: false,
-      user: null,
+      user: User(),
       isLogged: false,
     );
   }
@@ -39,12 +39,12 @@ class AuthState extends Equatable {
   static AuthState fromJson(dynamic json) => AuthState(
         isLoading: json["isLoading"],
         isLogged: json['isLogged'],
-        user: json['user'],
+        user: User.fromJson(json['user']),
       );
 
   dynamic toJson() => {
         "isLoading": isLoading,
         'isLogged': isLogged,
-        'user': user,
+        'user': user.toJson(),
       };
 }

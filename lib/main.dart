@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:itax_test/screens/screens.dart';
@@ -50,10 +51,21 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     return new StoreProvider<AppState>(
       store: store,
       child: MaterialApp(
+        localizationsDelegates: [
+            GlobalCupertinoLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
+          supportedLocales: [
+            const Locale('en', 'US'), // English
+            const Locale('th', 'TH'), // Thai
+          ],
           title: 'Todos Mobile',
           theme: getTheme(context),
           home: SplashScreen(),
           routes: <String, WidgetBuilder>{
+            '/todo-list': (BuildContext context) =>
+                new TodoListScreen(),
             '/login': (BuildContext context) => new LoginScreen(),
           }),
     );

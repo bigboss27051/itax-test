@@ -12,15 +12,14 @@ ThunkAction signInLocalAction({
   String password,
 }) {
   return (Store store) async {
-    try {
-      AuthenticationRepository authRepository = new AuthenticationRepository();
-      final user = await authRepository.loginWithEmailPassword(
-          email: email, password: password);
-      store.dispatch(new AuthenSuccessAction(user));
+    AuthenticationRepository authRepository = new AuthenticationRepository();
+    final isAuthticated = await authRepository.loginWithEmailPassword(
+        email: email, password: password);
+    if (isAuthticated) {
+      store.dispatch(new AuthenSuccessAction(User(email: email, id: '1')));
       completer.complete(null);
-    } catch (e) {
-      completer
-          .completeError(e.response.data['error'] ?? e.response.statusMessage);
+    } else {
+      completer.completeError('Invalid Email or Password.');
       store.dispatch(new FetchAuthFailure());
     }
   };

@@ -9,6 +9,7 @@ class Button extends StatelessWidget {
       this.height,
       this.preload,
       this.icon,
+      this.borderRadius,
       this.disabled = false,
       this.labelColor,
       this.borderColor});
@@ -23,6 +24,7 @@ class Button extends StatelessWidget {
   final Widget icon;
   final bool disabled;
   final Color borderColor;
+  final double borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,7 @@ class Button extends StatelessWidget {
                       ? backgroundColor
                       : btnBackgoundColor),
               width: 2.0),
-          borderRadius: new BorderRadius.all(new Radius.circular(10.0))),
+          borderRadius: new BorderRadius.all(new Radius.circular(borderRadius ?? 10.0))),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
@@ -55,7 +57,9 @@ class Button extends StatelessWidget {
                       ? Padding(
                           padding: EdgeInsets.only(
                               top: 10, bottom: 10, left: 15, right: 15),
-                          child: Row(
+                          child: 
+                          (this.label != null) ? 
+                          Row(
                               mainAxisSize: MainAxisSize.max,
                               children: <Widget>[
                                 new Expanded(
@@ -80,7 +84,7 @@ class Button extends StatelessWidget {
                                             fontWeight: FontWeight.normal),
                                       ),
                                     ))
-                              ]))
+                              ]): Center(child: this.icon,))
                       : Text(
                           label,
                           style: TextStyle(
