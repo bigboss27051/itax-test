@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class TextInput extends StatelessWidget {
   const TextInput(
       {Key key,
+      this.autofocus = false,
       this.decoration,
       this.maxLength,
       this.controller,
@@ -24,10 +25,12 @@ class TextInput extends StatelessWidget {
   final bool obscureText;
   final int maxLength;
   final InputDecoration decoration;
+  final bool autofocus;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autofocus: autofocus,
       decoration: decoration,
       maxLength: maxLength,
       readOnly: readOnly,

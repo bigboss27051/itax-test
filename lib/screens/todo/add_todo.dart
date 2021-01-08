@@ -13,12 +13,15 @@ class AddTodo extends StatefulWidget {
 }
 
 class _AddTodoState extends State<AddTodo> {
+  final _formKey = new GlobalKey<FormState>();
   final todoController = TextEditingController();
   final createDateController = new TextEditingController();
   DateTime selectedDate = DateTime.now();
   handleOnSave() {
+    if(_formKey.currentState.validate()) {
     final todo = Todo(todo: todoController.text, isCompleted: false);
     widget.onSave(todo);
+    }
   }
 
   _selectDate(BuildContext context) async {
@@ -51,6 +54,7 @@ class _AddTodoState extends State<AddTodo> {
     return Container(
         padding: EdgeInsets.only(top: ((width / 100) * 3)),
         child: Form(
+          key: _formKey,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,7 +72,7 @@ class _AddTodoState extends State<AddTodo> {
                     )),
                 SizedBox(height: ((height / 100) * 3)),
                 Divider(color: Colors.black),
-                TextFormField(
+                TextInput(
                   autofocus: true,
                   controller: todoController,
                   decoration: new InputDecoration(
@@ -99,6 +103,11 @@ class _AddTodoState extends State<AddTodo> {
                           onTap: () {
                             _selectDate(context);
                           },
+                          validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please input task.';
+                    }
+                  },
                           decoration: InputDecoration(
                               hintText: 'วัน / เดือน / ปี พ.ศ.',
                               suffixIcon: Icon(Icons.calendar_today)),
